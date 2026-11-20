@@ -1,0 +1,217 @@
+databaseChangeLog:
+  # Начальные данные: пользователи всех ролей, каталог туров, промокоды,
+  # транспорт и пример рейса. Пароль у всех пользователей: password123 (BCrypt)
+  - changeSet:
+      id: 010-insert-users
+      author: dyachkova
+      changes:
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: email, value: "manager@tour.by"}
+              - column: {name: password_hash, value: "$2b$10$YqD7WFZaiqsN6lGdGIolWucsxH6YuO4.dA8ZtvirpJEwirQpoSRjK"}
+              - column: {name: first_name, value: "Пётр"}
+              - column: {name: last_name, value: "Менеджеров"}
+              - column: {name: phone, value: "+375291000001"}
+              - column: {name: role, value: "MANAGER"}
+              - column: {name: blocked, valueBoolean: false}
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: email, value: "vehicle@tour.by"}
+              - column: {name: password_hash, value: "$2b$10$YqD7WFZaiqsN6lGdGIolWucsxH6YuO4.dA8ZtvirpJEwirQpoSRjK"}
+              - column: {name: first_name, value: "Виктор"}
+              - column: {name: last_name, value: "Перевозчиков"}
+              - column: {name: phone, value: "+375291000002"}
+              - column: {name: role, value: "VEHICLE_OWNER"}
+              - column: {name: blocked, valueBoolean: false}
+        - insert:
+            tableName: users
+            columns:
+              - column: {name: email, value: "client@tour.by"}
+              - column: {name: password_hash, value: "$2b$10$YqD7WFZaiqsN6lGdGIolWucsxH6YuO4.dA8ZtvirpJEwirQpoSRjK"}
+              - column: {name: first_name, value: "Анна"}
+              - column: {name: last_name, value: "Клиентова"}
+              - column: {name: phone, value: "+375291000003"}
+              - column: {name: role, value: "CLIENT"}
+              - column: {name: blocked, valueBoolean: false}
+
+  - changeSet:
+      id: 010-insert-tours
+      author: dyachkova
+      changes:
+        - insert:
+            tableName: tours
+            columns:
+              - column: {name: title, value: "Пляжный отдых в Анталье"}
+              - column: {name: description, value: "Неделя на побережье Средиземного моря, отель 4*, всё включено."}
+              - column: {name: country, value: "Турция"}
+              - column: {name: city, value: "Анталья"}
+              - column: {name: type, value: "BEACH"}
+              - column: {name: price, valueNumeric: 1450.00}
+              - column: {name: duration_days, valueNumeric: 7}
+              - column: {name: max_persons, valueNumeric: 30}
+              - column: {name: active, valueBoolean: true}
+        - insert:
+            tableName: tours
+            columns:
+              - column: {name: title, value: "Экскурсионный тур по Праге"}
+              - column: {name: description, value: "Три дня в сердце Европы: Карлов мост, Пражский Град, Староместская площадь."}
+              - column: {name: country, value: "Чехия"}
+              - column: {name: city, value: "Прага"}
+              - column: {name: type, value: "EXCURSION"}
+              - column: {name: price, valueNumeric: 620.00}
+              - column: {name: duration_days, valueNumeric: 3}
+              - column: {name: max_persons, valueNumeric: 40}
+              - column: {name: active, valueBoolean: true}
+        - insert:
+            tableName: tours
+            columns:
+              - column: {name: title, value: "Горнолыжный курорт Банско"}
+              - column: {name: description, value: "Склоны Пирина, ски-пасс на 6 дней, проживание у подъёмника."}
+              - column: {name: country, value: "Болгария"}
+              - column: {name: city, value: "Банско"}
+              - column: {name: type, value: "SKI"}
+              - column: {name: price, valueNumeric: 980.00}
+              - column: {name: duration_days, valueNumeric: 8}
+              - column: {name: max_persons, valueNumeric: 24}
+              - column: {name: active, valueBoolean: true}
+        - insert:
+            tableName: tours
+            columns:
+              - column: {name: title, value: "Круиз по Норвежским фьордам"}
+              - column: {name: description, value: "Лайнер класса люкс, Гейрангер-фьорд и Берген за 10 дней."}
+              - column: {name: country, value: "Норвегия"}
+              - column: {name: city, value: "Берген"}
+              - column: {name: type, value: "CRUISE"}
+              - column: {name: price, valueNumeric: 2900.00}
+              - column: {name: duration_days, valueNumeric: 10}
+              - column: {name: max_persons, valueNumeric: 50}
+              - column: {name: active, valueBoolean: true}
+        - insert:
+            tableName: tours
+            columns:
+              - column: {name: title, value: "Приключения в Гималаях"}
+              - column: {name: description, value: "Треккинг к базовому лагерю Аннапурны с опытными гидами."}
+              - column: {name: country, value: "Непал"}
+              - column: {name: city, value: "Покхара"}
+              - column: {name: type, value: "ADVENTURE"}
+              - column: {name: price, valueNumeric: 1750.00}
+              - column: {name: duration_days, valueNumeric: 14}
+              - column: {name: max_persons, valueNumeric: 12}
+              - column: {name: active, valueBoolean: true}
+        - insert:
+            tableName: tours
+            columns:
+              - column: {name: title, value: "Пляжи Хургады"}
+              - column: {name: description, value: "Красное море, дайвинг и коралловые рифы, отель 5*."}
+              - column: {name: country, value: "Египет"}
+              - column: {name: city, value: "Хургада"}
+              - column: {name: type, value: "BEACH"}
+              - column: {name: price, valueNumeric: 1100.00}
+              - column: {name: duration_days, valueNumeric: 10}
+              - column: {name: max_persons, valueNumeric: 35}
+              - column: {name: active, valueBoolean: true}
+        - insert:
+            tableName: tours
+            columns:
+              - column: {name: title, value: "Выходные в Вильнюсе"}
+              - column: {name: description, value: "Автобусный экскурсионный тур: Старый город, башня Гедимина, Тракай."}
+              - column: {name: country, value: "Литва"}
+              - column: {name: city, value: "Вильнюс"}
+              - column: {name: type, value: "EXCURSION"}
+              - column: {name: price, valueNumeric: 250.00}
+              - column: {name: duration_days, valueNumeric: 2}
+              - column: {name: max_persons, valueNumeric: 45}
+              - column: {name: active, valueBoolean: true}
+        - insert:
+            tableName: tours
+            columns:
+              - column: {name: title, value: "Горнолыжные Альпы, Китцбюэль"}
+              - column: {name: description, value: "Легендарный австрийский курорт, трассы для любого уровня."}
+              - column: {name: country, value: "Австрия"}
+              - column: {name: city, value: "Китцбюэль"}
+              - column: {name: type, value: "SKI"}
+              - column: {name: price, valueNumeric: 2100.00}
+              - column: {name: duration_days, valueNumeric: 7}
+              - column: {name: max_persons, valueNumeric: 20}
+              - column: {name: active, valueBoolean: true}
+        - insert:
+            tableName: tours
+            columns:
+              - column: {name: title, value: "Средиземноморский круиз из Барселоны"}
+              - column: {name: description, value: "Барселона — Рим — Марсель — Пальма на лайнере Costa."}
+              - column: {name: country, value: "Испания"}
+              - column: {name: city, value: "Барселона"}
+              - column: {name: type, value: "CRUISE"}
+              - column: {name: price, valueNumeric: 1850.00}
+              - column: {name: duration_days, valueNumeric: 8}
+              - column: {name: max_persons, valueNumeric: 60}
+              - column: {name: active, valueBoolean: true}
+        - insert:
+            tableName: tours
+            columns:
+              - column: {name: title, value: "Рафтинг и каньонинг в Черногории"}
+              - column: {name: description, value: "Каньон реки Тары, активный отдых для смелых."}
+              - column: {name: country, value: "Черногория"}
+              - column: {name: city, value: "Жабляк"}
+              - column: {name: type, value: "ADVENTURE"}
+              - column: {name: price, valueNumeric: 890.00}
+              - column: {name: duration_days, valueNumeric: 6}
+              - column: {name: max_persons, valueNumeric: 16}
+              - column: {name: active, valueBoolean: true}
+
+  - changeSet:
+      id: 010-insert-promo-codes
+      author: dyachkova
+      changes:
+        - insert:
+            tableName: promo_codes
+            columns:
+              - column: {name: code, value: "SUMMER10"}
+              - column: {name: discount_percent, valueNumeric: 10}
+              - column: {name: valid_from, valueDate: "2025-01-01"}
+              - column: {name: valid_to, valueDate: "2027-12-31"}
+              - column: {name: max_uses, valueNumeric: 500}
+              - column: {name: used_count, valueNumeric: 0}
+              - column: {name: active, valueBoolean: true}
+        - insert:
+            tableName: promo_codes
+            columns:
+              - column: {name: code, value: "WELCOME5"}
+              - column: {name: discount_percent, valueNumeric: 5}
+              - column: {name: valid_from, valueDate: "2025-01-01"}
+              - column: {name: valid_to, valueDate: "2027-12-31"}
+              - column: {name: max_uses, valueNumeric: 1000}
+              - column: {name: used_count, valueNumeric: 0}
+              - column: {name: active, valueBoolean: true}
+
+  - changeSet:
+      id: 010-insert-transport-and-trip
+      author: dyachkova
+      changes:
+        # Транспорт закреплён за пользователем vehicle@tour.by (id=2)
+        - insert:
+            tableName: transports
+            columns:
+              - column: {name: model, value: "Mercedes-Benz Tourismo"}
+              - column: {name: plate_number, value: "1234 AB-7"}
+              - column: {name: type, value: "BUS"}
+              - column: {name: seats, valueNumeric: 50}
+              - column: {name: owner_id, valueNumeric: 2}
+        - insert:
+            tableName: transports
+            columns:
+              - column: {name: model, value: "Volkswagen Crafter"}
+              - column: {name: plate_number, value: "5678 CD-7"}
+              - column: {name: type, value: "MINIVAN"}
+              - column: {name: seats, valueNumeric: 18}
+              - column: {name: owner_id, valueNumeric: 2}
+        # Пример рейса: автобус назначен на тур в Вильнюс
+        - insert:
+            tableName: trips
+            columns:
+              - column: {name: tour_id, valueNumeric: 7}
+              - column: {name: transport_id, valueNumeric: 1}
+              - column: {name: departure_date, valueDate: "2026-06-15"}
+              - column: {name: status, value: "SCHEDULED"}

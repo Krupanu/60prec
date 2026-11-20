@@ -1,0 +1,33 @@
+databaseChangeLog:
+  - changeSet:
+      id: 008-create-favorites
+      author: dyachkova
+      changes:
+        - createTable:
+            tableName: favorites
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_favorites_user
+                    references: users(id)
+              - column:
+                  name: tour_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_favorites_tour
+                    references: tours(id)
+        - addUniqueConstraint:
+            tableName: favorites
+            columnNames: user_id, tour_id
+            constraintName: uk_favorites_user_tour

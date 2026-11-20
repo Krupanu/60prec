@@ -1,0 +1,21 @@
+databaseChangeLog:
+  - include:
+      file: db/changelog/changes/001-create-users.yaml
+  - include:
+      file: db/changelog/changes/002-create-tours.yaml
+  - include:
+      file: db/changelog/changes/003-create-promo-codes.yaml
+  - include:
+      file: db/changelog/changes/004-create-transports.yaml
+  - include:
+      file: db/changelog/changes/005-create-bookings.yaml
+  - include:
+      file: db/changelog/changes/006-create-trips.yaml
+  - include:
+      file: db/changelog/changes/007-create-reviews.yaml
+  - include:
+      file: db/changelog/changes/008-create-favorites.yaml
+  - include:
+      file: db/changelog/changes/009-create-documents.yaml
+  - include:
+      file: db/changelog/changes/010-insert-initial-data.yaml

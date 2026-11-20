@@ -1,0 +1,62 @@
+databaseChangeLog:
+  - changeSet:
+      id: 005-create-bookings
+      author: dyachkova
+      changes:
+        - createTable:
+            tableName: bookings
+            columns:
+              - column:
+                  name: id
+                  type: bigint
+                  autoIncrement: true
+                  constraints:
+                    primaryKey: true
+                    nullable: false
+              - column:
+                  name: user_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_bookings_user
+                    references: users(id)
+              - column:
+                  name: tour_id
+                  type: bigint
+                  constraints:
+                    nullable: false
+                    foreignKeyName: fk_bookings_tour
+                    references: tours(id)
+              - column:
+                  name: start_date
+                  type: date
+                  constraints:
+                    nullable: false
+              - column:
+                  name: persons
+                  type: int
+                  constraints:
+                    nullable: false
+              - column:
+                  name: total_price
+                  type: numeric(12,2)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: status
+                  type: varchar(20)
+                  constraints:
+                    nullable: false
+              - column:
+                  name: promo_code_id
+                  type: bigint
+                  constraints:
+                    nullable: true
+                    foreignKeyName: fk_bookings_promo_code
+                    references: promo_codes(id)
+              - column:
+                  name: created_at
+                  type: timestamp
+                  defaultValueComputed: CURRENT_TIMESTAMP
+                  constraints:
+                    nullable: false
